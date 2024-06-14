@@ -1,6 +1,7 @@
 package learnStream;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -62,6 +63,49 @@ public class StreamPractice {
 
         List<String> nameCountStream =  names.stream().distinct().collect(Collectors.toList());
         System.out.println("Array list without duplicates ->"+ nameCountStream);
+
+        // How do you find frequency of each character in a string using Java 8 streams?
+
+        // Traditional method
+
+        List<String> names1 = Arrays.asList("a","a","b","x","d","e","f","e","x","x");
+
+        HashMap<String,Integer> hash_freq = new HashMap<>();
+
+        for(String name: names1){
+            if (hash_freq.containsKey(name)){
+                hash_freq.put(name,hash_freq.get(name)+1);
+
+            }
+            else{
+                hash_freq.put(name,1);
+            }
+        }
+        System.out.println("Count");
+        System.out.println("Count Frequency -> "+ hash_freq);
+
+        // Using Stream
+        Map<String, Long> stationeryCountMap =
+                names1.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        System.out.println("Count Frequency using Stream -> "+ stationeryCountMap);
+
+        // 5) How do you sort the given list  in reverse order?
+        // Traditional method
+
+        List<Integer> integers = Arrays.asList(3,6,8,1,3,2,4,9);
+        Collections.sort(integers);
+        System.out.println("Sorted list->" + integers);
+
+        Collections.sort(integers,Collections.reverseOrder());
+        System.out.println("Reverse Sorted-> " + integers);
+
+        // stream method
+        List<Integer> integers1 = Arrays.asList(3,6,8,1,3,2,4,9);
+
+        List<Integer> sorted_ = integers1.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+        System.out.println(" sTream Sorted list->" + sorted_);
+
 
     }
 }
