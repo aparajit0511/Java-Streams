@@ -93,6 +93,33 @@ public class StreamPractice2 {
             System.out.println("Strings are not anagram");
         }
 
+        // 13) Find sum of all digits of a number in Java 8?
+
+        int i = 15623;
+        Integer sumOfDigits = Stream.of(String.valueOf(i).split("")).collect(Collectors.summingInt(Integer::parseInt));
+        System.out.println("Sum of digits : " + sumOfDigits);
+
+        // 14) Find second largest number in an integer array?
+
+        List<Integer> listOfIntegers = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
+
+        Integer secondLargest = listOfIntegers.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
+        System.out.println(secondLargest);
+
+        // 15) Given a list of strings, sort them according to increasing order of their length?
+        List<String> listOfStrings = Arrays.asList("Java", "Python", "C#", "HTML", "Kotlin", "C++", "COBOL", "C");
+
+        listOfStrings.stream().sorted().forEach(System.out::println);
+
+        // 16) Given an integer array, find sum and average of all elements?
+
+        int[] a = new int[] {45, 12, 56, 15, 24, 75, 31, 89};
+        int sum = Arrays.stream(a).sum();
+        System.out.println("Sum is :" + sum);
+        double average = Arrays.stream(a).average().getAsDouble();
+        System.out.println("Average is : "+ average);
+
+
 
     } // main
 } // class
